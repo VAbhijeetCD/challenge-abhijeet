@@ -43,3 +43,5 @@ model widgets {
   updated     DateTime    @default(now()) @updatedAt @db.Timestamp(6)
 }
 ```
+
+<img width="590" alt="widget-settings" src="https://github.com/user-attachments/assets/7c6e86fe-e98d-4dd5-9c74-e5f6150f1589" />

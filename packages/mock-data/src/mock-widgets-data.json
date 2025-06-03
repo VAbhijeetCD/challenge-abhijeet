@@ -1,0 +1,63 @@
+[
+    {
+      "id": "081d0bb1-bfec-4dc0-b1c9-e52712840f2b",
+      "name": "Widget #1",
+      "property_id": "910684c3-2614-417b-a84c-70a0b25937a7",
+      "type": "static",
+      "group_id": "123-456-789",
+      "settings": {
+        "sources": ["google_maps"],
+        "position": "bottom-right",
+        "showReviewUsButton": true,
+        "showReadReviewsLink": true
+      },
+      "active": true,
+      "created": "2025-02-24T10:58:25.657Z",
+      "updated": "2025-02-24T10:58:25.657Z"
+    },
+    {
+      "id": "0a2a8076-22f6-4634-9239-08585dce64dc",
+      "name": "Widget #2",
+      "property_id": "cf3e2e18-5d5f-43a3-93f6-c9a601f7b896",
+      "type": "static",
+      "group_id": "123-456-789",
+      "settings": {
+        "sources": ["booking_com", "google_maps", "tripadvisor_com"],
+        "position": "bottom-left"
+      },
+      "active": true,
+      "created": "2025-01-17T09:40:36.124Z",
+      "updated": "2025-01-17T09:40:36.124Z"
+    },
+    {
+      "id": "1a80499d-f0d0-42af-9156-153f98f18801",
+      "name": "Floating Widget #3",
+      "property_id": "da015ec7-ac5b-4629-872f-c50ff47ff25d",
+      "type": "floating",
+      "group_id": "123-456-789",
+      "settings": {
+        "sources": ["google_maps"],
+        "position": "top-left",
+        "showReviewUsButton": true,
+        "showReadReviewsLink": true
+      },
+      "active": true,
+      "created": "2025-03-06T08:27:24.077Z",
+      "updated": "2025-03-06T08:27:24.077Z"
+    },
+    {
+      "id": "2c9eac5f-aec4-4227-8eda-daf9c8085bd4",
+      "name": "Floating Widget #4",
+      "property_id": "0f831285-9727-44df-8258-4766fdf3dc68",
+      "type": "floating",
+      "group_id": "123-456-789",
+      "settings": {
+        "sources": ["booking_com"],
+        "position": "top-left"
+      },
+      "active": true,
+      "created": "2025-02-11T13:21:04.315Z",
+      "updated": "2025-02-11T13:21:04.315Z"
+    }
+  ]
+  

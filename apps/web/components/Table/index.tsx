@@ -10,9 +10,10 @@ import { useRouter } from 'next/router';
 import { useMemo, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 import columns from './columns';
+import { Widget } from '../WidgetsTable';
 
 type Props = {
-	data: TableData;
+	data: Widget[];
 	isLoading?: boolean;
 	totalRows: number;
 };
@@ -111,10 +112,10 @@ const Table = ({ data, totalRows, isLoading }: Props) => {
 					{!isLoading && totalRows > 0 && data.length === 0 && (
 						<tr>
 							<td
-								colSpan={table.getHeaderGroups()[0].headers.length}
+								colSpan={table?.getHeaderGroups()[0]?.headers.length}
 								className="text-center py-4"
 							>
-								{t('integrations:placeholderNoSearchResults')}
+								No Search Results
 							</td>
 						</tr>
 					)}
@@ -122,7 +123,7 @@ const Table = ({ data, totalRows, isLoading }: Props) => {
 					{!isLoading && totalRows === 0 && (
 						<tr>
 							<td
-								colSpan={table.getHeaderGroups()[0].headers.length}
+								colSpan={table?.getHeaderGroups()[0]?.headers.length}
 								className="text-center py-4 text-textc-gray italic"
 							>
 								No Widget Created

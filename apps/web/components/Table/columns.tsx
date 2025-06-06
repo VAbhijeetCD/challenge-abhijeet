@@ -2,10 +2,10 @@
 /* eslint-disable @next/next/no-img-element */
 import { createColumnHelper } from '@tanstack/react-table';
 import { NextRouter } from 'next/router';
-import ChangeStatus from './ChangeStatus';
 import { showModal } from './helpers';
+import { Widget } from '../WidgetsTable';
 
-const columnHelper = createColumnHelper<TableData[0]>();
+const columnHelper = createColumnHelper<Widget>();
 
 export default (router: NextRouter) => [
 	columnHelper.accessor('name', {
@@ -34,8 +34,8 @@ export default (router: NextRouter) => [
 						}
 					}}
 				/>
-				<p className="text-textc text-sm font-bold overflow-hidden whitespace-nowrap text-ellipsis">
-					{getValue().name}
+				<p className="text-textc text-sm font-medium overflow-hidden whitespace-nowrap text-ellipsis">
+					{getValue()?.name}
 				</p>
 			</div>
 		),
@@ -43,8 +43,8 @@ export default (router: NextRouter) => [
 	columnHelper.accessor('type', {
 		header: () => <p>Type</p>,
 		cell: ({ getValue }) => (
-			<div type={getValue() === 'floating' ? 'primary' : 'negative'}>
-				<span className="capitalize">{getValue()}</span>
+			<div data-type={getValue() === 'floating' ? 'primary' : 'negative'}>
+				<span className="capitalize text-textc">{getValue()}</span>
 			</div>
 		),
 	}),
@@ -70,7 +70,7 @@ export default (router: NextRouter) => [
 		cell: ({ row }) => (
 			<button
 				className="text-textc-gray"
-				onClick={() => showModal('settings', row.original.id, router)}
+				onClick={() => showModal('settings',router, row.original.id)}
 			>
 				Settings
 			</button>
@@ -82,7 +82,7 @@ export default (router: NextRouter) => [
 			<button
 				className="text-textc-gray"
 				onClick={() =>
-					showModal('code', row.original.id, router, row.original.type)
+					showModal('code',router, row.original.id, row.original.type)
 				}
 			>
 				Get Code
@@ -94,7 +94,7 @@ export default (router: NextRouter) => [
 		cell: ({ row }) => (
 			<button
 				className="text-textc-gray"
-				onClick={() => showModal('preview', row.original.id, router)}
+				onClick={() => showModal('preview',router, row.original.id)}
 			>
 				Preview
 			</button>

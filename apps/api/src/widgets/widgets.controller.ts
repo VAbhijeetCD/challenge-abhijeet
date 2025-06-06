@@ -1,63 +1,60 @@
 import {
     Body,
     Controller,
-    Get, Param, Post,
-    Put, UsePipes,
+    Get, 
+    Param, 
+    Post,
+    Put,
+    Delete,
+    HttpCode,
+    HttpStatus,
+    UseGuards,
+    UseInterceptors,
+    UsePipes,
     ValidationPipe
 } from '@nestjs/common';
-
+import { ThrottlerGuard } from '@nestjs/throttler';
 import { WidgetsService } from './widgets.service';
+import { CreateWidgetDto } from './dto/create-widget.dto';
+import { UpdateWidgetDto } from './dto/update-widget.dto';
+import { LoggingInterceptor } from './interceptors/logging.interceptor';
 
 @Controller('widgets')
+@UseGuards(ThrottlerGuard)
+@UseInterceptors(LoggingInterceptor)
 export class WidgetsController {
 	private readonly groupId = '123-456-789';
 
 	constructor(private readonly widgetsService: WidgetsService) {}
 
     @Get()
-	findAll() {
+	async findAll() {
 		return this.widgetsService.findAll(this.groupId);
 	}
 
+    @Get(':id')
+	async findOne(@Param('id') id: string) {
+        return this.widgetsService.findOne(id, this.groupId);
+	}
 
 	@Post()
-	create(@Body() body: {
-		name: string;
-		property_id: string;
-		type: 'floating' | 'static';
-		settings: {
-			position: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
-			sources: ('google_maps' | 'booking_com' | 'tripadvisor_com')[];
-			showReviewUsButton?: boolean;
-			showReadReviewsLink?: boolean;
-		};
-	}) {
-		// ...
+    @UsePipes(new ValidationPipe({ transform: true, whitelist: true }))
+	async create(@Body() createWidgetDto: CreateWidgetDto) {
+		return this.widgetsService.create(createWidgetDto, this.groupId);
 	}
-
 
 	@Put(':id')
-	update(
+    @UsePipes(new ValidationPipe({ transform: true, whitelist: true }))
+	async update(
 		@Param('id') id: string,
-		@Body() body: {
-			name?: string;
-			property_id?: string;
-			type?: 'floating' | 'static';
-			active?: boolean;
-			settings: {
-				position?: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
-				sources?: ('google_maps' | 'booking_com' | 'tripadvisor_com')[];
-				showReviewUsButton?: boolean;
-				showReadReviewsLink?: boolean;
-			};
-		},
+		@Body() updateWidgetDto: UpdateWidgetDto,
 	) {
-		// ...
+		return this.widgetsService.update(id, updateWidgetDto, this.groupId);
 	}
 
-
-    @Get('/:id')
-	getDataForWidget(@Param('id') widgetId: string) {
-        // ...
-	}
+    @Delete(':id')
+    @HttpCode(HttpStatus.NO_CONTENT)
+    async remove(@Param('id') id: string) {
+        return this.widgetsService.remove(id, this.groupId);
+    }
 }

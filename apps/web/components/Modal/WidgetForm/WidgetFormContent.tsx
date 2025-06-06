@@ -36,8 +36,9 @@ const properties = [
   {
     id: "0f831285-9727-44df-8258-4766fdf3dc68",
     name: "The Plasa",
-    image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3"
-  }
+    image:
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3",
+  },
 ];
 
 export const WidgetFormContent = ({
@@ -68,7 +69,7 @@ export const WidgetFormContent = ({
               onChange={(e) =>
                 setFormData({ ...formData, name: e.target.value })
               }
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full text-textc px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               placeholder="Enter widget name"
               required
             />
@@ -76,7 +77,10 @@ export const WidgetFormContent = ({
 
           {/* Property Selection */}
           <div>
-            <label className="block text-lg font-medium text-gray-900 mb-3">
+            <label
+              htmlFor="property_id"
+              className="block text-sm font-medium text-gray-700 mb-2"
+            >
               Property
             </label>
             <PropertyDropdown
